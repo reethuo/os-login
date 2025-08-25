@@ -3,7 +3,7 @@
   hosts: all
   become: true
   vars:
-    ansible_user: reethu2302
+    ansible_user: sa_115673039090474447644
     ansible_ssh_private_key_file: id_rsa
 
   pre_tasks:
