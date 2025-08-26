@@ -1,6 +1,6 @@
 ---
 - name: Deploy a Docker container
-  hosts: ansible_host
+  hosts: all
   become: yes
   tasks:
     - name: Ensure Docker is running
