@@ -5,12 +5,10 @@
   tasks:
     - name: Ensure apt-get is not locked
       ansible.builtin.shell: |
-        sudo rm -f /var/lib/dpkg/lock
-        sudo rm -f /var/lib/dpkg/lock-frontend
-        sudo rm -f /var/cache/apt/archives/lock
-      args:
-        warn: false
-
+        rm -f /var/lib/dpkg/lock
+        rm -f /var/lib/dpkg/lock-frontend
+        rm -f /var/cache/apt/archives/lock
+    
     - name: Install Docker prerequisites
       ansible.builtin.apt:
         name:
