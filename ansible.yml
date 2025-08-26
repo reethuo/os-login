@@ -1,15 +1,24 @@
 ---
-- name: Ansible Playbook for CentOS Stream 9
-  hosts: all
-  become: true
-  vars:
-    ansible_user: sa_115673039090474447644
-    ansible_ssh_private_key_file: id_rsa
+- name: Deploy a Docker container
+  hosts: ansible_host
+  become: yes
+  tasks:
+    - name: Ensure Docker is running
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: yes
 
-  pre_tasks:
-    - name: Update dnf cache
-      dnf:
-        update_cache: yes
+    - name: Pull the latest container image
+      community.docker.docker_image:
+        name: reethu2/sample4:latest
+        source: pull
 
-  roles:
-    - geerlingguy.apache
+    - name: Run the container
+      community.docker.docker_container:
+        name: my-app-container
+        image: reethu2/sample4:latest
+        state: started
+        recreate: yes
+        ports:
+          - "80:80"
